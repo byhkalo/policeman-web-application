@@ -1,0 +1,55 @@
+<h1 class="mat-h1">My Emergencies</h1>
+<mat-form-field>
+  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+</mat-form-field>
+
+<div class="mat-elevation-z8">
+  <table mat-table class="full-width-table" [dataSource]="dataSource" matSort aria-label="Elements">
+    <!-- Latlong Column -->
+    <ng-container matColumnDef="latlong">
+      <th mat-header-cell *matHeaderCellDef>Lat/Long</th>
+      <td mat-cell *matCellDef="let row">lat:{{row.latitude}} | long:{{row.longitude}}</td>
+    </ng-container>
+
+    <!-- Time Column -->
+    <ng-container matColumnDef="time">
+      <th mat-header-cell *matHeaderCellDef>Time</th>
+      <td mat-cell *matCellDef="let row">{{dateTime(row.timestamp)}}</td>
+    </ng-container>
+
+    <!-- Info Column -->
+    <ng-container matColumnDef="info">
+      <th mat-header-cell *matHeaderCellDef>INFO</th>
+      <td mat-cell *matCellDef="let row">{{row.info}}</td>
+    </ng-container>
+
+    <!-- isRequestedAmbulance Column -->
+    <ng-container matColumnDef="isRequestedAmbulance">
+      <th mat-header-cell *matHeaderCellDef>Is Requested AMB</th>
+      <td mat-cell *matCellDef="let row">
+        <div *ngIf="row.ambulanceDetail.isRequested">{{row.ambulanceDetail.isRequested}}</div>
+        <button mat-raised-button color="accent" *ngIf="!row.ambulanceDetail.isRequested" 
+          (click)="$event.stopPropagation(); requestAmbulance(row)">REQUEST AMBULANCE</button>
+      </td>
+      
+    </ng-container>
+
+    <!-- Map Column -->
+    <ng-container matColumnDef="map">
+      <th mat-header-cell *matHeaderCellDef>Show on map</th>
+      <td mat-cell *matCellDef="let row">
+        <button mat-raised-button color="primary" (click)="$event.stopPropagation(); showOnMap(row)">SHOW ON MAP</button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selectRow(row)"></tr>
+  </table>
+
+  <mat-paginator #paginator
+      [length]="dataSource.data.length"
+      [pageIndex]="0"
+      [pageSize]="50"
+      [pageSizeOptions]="[25, 50, 100, 250]">
+  </mat-paginator>
+</div>
