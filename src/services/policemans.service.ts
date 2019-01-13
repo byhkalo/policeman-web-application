@@ -16,7 +16,7 @@ export class PolicemansService {
     
 
     constructor(private fireDatabase: AngularFireDatabase) {
-        this.policemansAllQuery = fireDatabase.list<Policeman>('users');
+        this.policemansAllQuery = fireDatabase.list<Policeman>('users/collection');
         this.policemansAllQuery.valueChanges().subscribe(policemans => {
             this.policemansAllObservable.next(policemans);
         });

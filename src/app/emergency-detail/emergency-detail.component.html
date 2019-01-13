@@ -10,7 +10,7 @@
           </mat-card-title>
         </mat-card-header>
         <mat-card-content class="dashboard-card-content">
-          <agm-map [latitude]="cityLatitude" [longitude]="cityLongitude" (mapClick)="mapClick($event)" [zoom]=15>
+          <agm-map [latitude]="cityLatitude" [longitude]="cityLongitude" [zoom]=15>
             <agm-marker [latitude]="latitude" [longitude]="longitude"
             [iconUrl]='{"url": "https://www.seton.net/wp-content/uploads/sites/2/2014/04/emergency-icon.png","scaledSize": {"height": 50, "width": 50}}'
             ></agm-marker>
