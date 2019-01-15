@@ -26,7 +26,7 @@ export class EmergenciesService {
             this.currentPoliceman = tempPoliceman;
             this.recalculateEmergencies()
         });
-        this.emergensiesAllQuery = fireDatabase.list<Emergency>('emergencies/collection');
+        this.emergensiesAllQuery = fireDatabase.list<Emergency>('Emergency/collection');
         this.emergensiesAllQuery.valueChanges().subscribe(emergencies => {
             console.log('Get Emergencies')
             console.log(emergencies)
